@@ -49,6 +49,10 @@ def deleteAllPostgresql(tblName):
     connection.commit()
 
 
+def dropTablePostgresql(tblName):
+    cursor.execute("Drop table "+tblName+"")
+    connection.commit()
+
 def csvInsertPostgresql(tblName,fileName):                          #importing data through a csv file
     with open(''+fileName+'.csv', 'r') as file:
         reader = csv.reader(file)
@@ -68,6 +72,7 @@ while option != 0 :
     print("5.Delete a row from a table")
     print("6.Delete entire row from a table")
     print("7.Insert data from CSV to table")
+    print("8.Drop a table")
     print("Enter 0 to exit!")
     option = int(input("-> "))
     match option:
@@ -176,30 +181,21 @@ while option != 0 :
             else:
                 print(""+tblName+" doesn't exists")
                 time.sleep(2)
-                os.system("clear")     
+                os.system("clear")
+        case 8:
+            os.system("clear")
+            tblName = input("Enter name of the table: ")
+            result = checkPostgresql(tblName)
+            if result == True:
+                dropTablePostgresql(tblName)
+                print("Dropped!")
+                time.sleep(2)
+                os.system("clear")
+            else:
+                print(""+tblName+" doesn't exists")
+                time.sleep(2)
+                os.system("clear")
         case _:
             print("Wrong Input")
             time.sleep(2)
             os.system("clear")
-                
-                
-            
-                
-                
-            
-            
-                
-                
-                
-                
-                
-                
-                
-
-            
-            
-        
-    
-        
-    
-
